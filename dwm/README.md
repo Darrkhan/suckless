@@ -4,8 +4,6 @@ DWM - clean and light purple ricing
 Packages
 --------
 Needed package for this config: 
-
-	-alacritty
 	-nerd-fonts
 	-noto-fonts-emoji
 
