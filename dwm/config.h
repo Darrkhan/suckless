@@ -3,8 +3,8 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 12;        /* gaps between windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int gappx     = 14;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -29,8 +29,8 @@ static const char ayu_fg[]          = "#5C6166";
 
 static const char *colors[][3]      = {
   /*               fg         bg         border   */
-	[SchemeNorm] = { ayu_fg, ayu_bg, col_blue2 },
-	[SchemeSel]  = { ayu_fg, ayu_bg, col_blue2 },
+	[SchemeNorm] = { ayu_fg, ayu_bg, ayu_fg },
+	[SchemeSel]  = { ayu_fg, ayu_bg, ayu_fg },
 };
 
 /* tagging */
@@ -55,9 +55,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */
