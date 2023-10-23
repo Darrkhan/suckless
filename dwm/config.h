@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details. */
+/* Includes */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -15,19 +17,24 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char col_purple1[]     = "#6832a8";
 /*Blue*/
-static const char col_blue1[]       = "#77aaff";
-static const char col_blue2[]       = "#99cfff";
-static const char col_blue3[]       = "#bbeeff";
-static const char col_blue4[]       = "#5588ff";
-static const char col_blue5[]       = "#3366ff";
+static const char col_blue1[]       = "#11111f";
+static const char col_blue4[]       = "#99cfff";
+static const char col_blue5[]       = "#bbeeff";
+static const char col_blue3[]       = "#5588ff";
+static const char col_blue2[]       = "#3366ff";
+
+/* Ayu theme light*/
+static const char ayu_bg[]          = "#FCFCFC";
+static const char ayu_fg[]          = "#5C6166";
+
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_blue3, col_blue1, col_blue2 },
-	[SchemeSel]  = { col_blue4, col_blue3,  col_blue3  },
+  /*               fg         bg         border   */
+	[SchemeNorm] = { ayu_fg, ayu_bg, col_blue2 },
+	[SchemeSel]  = { ayu_fg, ayu_bg, col_blue2 },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -65,9 +72,17 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+
+static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
+static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
+
+static const char *upvol[]      = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_SINK@",      "5%+",      NULL };
+static const char *downvol[]    = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_SINK@",      "5%-",      NULL };
+static const char *mutevol[]    = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_SINK@",      "toggle",   NULL };
+
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", ayu_bg, "-nf", ayu_fg, "-sb", col_blue5, "-sf", col_blue4, NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -104,6 +119,11 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_F2, spawn, {.v = downvol } },
+	{ MODKEY,                       XK_F1, spawn, {.v = mutevol } },
+	{ MODKEY,                       XK_F3, spawn, {.v = upvol   } },
+	{ MODKEY,                       XK_F5, spawn, {.v = light_up } },
+	{ MODKEY,                       XK_F4, spawn, {.v = light_down } },
 };
 
 /* button definitions */
