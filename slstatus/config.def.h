@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 1000;
+const unsigned int interval = 500;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
@@ -65,5 +65,16 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+	//{wifi_perc, "WIFI: %s% | ",	   "wlp1s0"   },
+  { run_command, " %s | ",   "wpctl get-volume @DEFAULT_SINK@"},
+  { netspeed_rx, "Up: %s | ",	  "wlp1s0"   },
+  { netspeed_tx, "Down: %s | ", 	  "wlp1s0"   },
+ // { wifi_essid,"  | ",    "wlp1s0"},
+	{ battery_perc, "Bat: %s% | ",       "BAT0"    },
+	{ ram_perc, "Ram: %s% | ",           NULL    },
+	{ cpu_perc, "Cpu: %s%  | ", 	    NULL    },
+  	//{ cpu_freq, "%sHz| ",      NULL    },
+	{ disk_perc, "CryptSystem: %s%  | ",	    "/"     },
+  	//{ disk_free, "%s | ",              "/"     },
+	{ datetime, "%s ",           "%F %T" },
 };
